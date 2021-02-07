@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.college.mapper.ProfessionMapper">
+
+    <resultMap type="Profession" id="ProfessionResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="processDescribe" column="process_describe"/>
+        <result property="processImg" column="process_img"/>
+        <result property="schoolId" column="school_id"/>
+        <association property="school" column="school_id" javaType="Profession" resultMap="SchoolResult"/>
+    </resultMap>
+
+
+    <resultMap type="School" id="SchoolResult">
+        <result property="id" column="schoolId"/>
+        <result property="name" column="schoolName"/>
+        <result property="lego" column="lego"/>
+        <result property="coverImg" column="cover_img"/>
+        <result property="shortIntroduction" column="short_introduction"/>
+        <result property="introduction" column="introduction"/>
+        <result property="ranking" column="ranking"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+    <sql id="selectProfessionVo">
+    select p.id,p.name,p.type,p.del_flag,p.process_describe,p.process_img,p.school_id,
+        s.id schoolId,s.name schoolName,s.lego,s.cover_img,s.short_introduction,s.introduction,s.ranking,s.del_flag
+        from profession p
+        left join school s
+        on p.school_id = s.id
+        </sql>
+
+    <select id="selectProfessionList" parameterType="Profession" resultMap="ProfessionResult">
+        <include refid="selectProfessionVo"/>
+        where p.del_flag = 0
+        <if test="name != null  and name != ''">and p.name like concat('%', #{name}, '%')</if>
+        <if test="processDescribe != null  and processDescribe != ''">and p.process_describe = #{processDescribe}</if>
+        <if test="processImg != null  and processImg != ''">and p.process_img = #{processImg}</if>
+        <if test="schoolId != null  and schoolId != ''">and s.id = #{schoolId}</if>
+
+    </select>
+
+    <select id="selectProfessionById" parameterType="Long" resultMap="ProfessionResult">
+        <include refid="selectProfessionVo"/>
+        where p.id = #{id} and p.del_flag = 0
+    </select>
+
+    <insert id="insertProfession" parameterType="Profession" useGeneratedKeys="true" keyProperty="id">
+        insert into profession
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="type != null">type,</if>
+            <if test="processDescribe != null">process_describe,</if>
+            <if test="processImg != null and processImg != ''">process_img,</if>
+            <if test="schoolId != null">school_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="type != null">#{type},</if>
+            <if test="processDescribe != null">#{processDescribe},</if>
+            <if test="processImg != null and processImg != ''">#{processImg},</if>
+            <if test="schoolId != null">#{schoolId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateProfession" parameterType="Profession">
+        update profession
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="processDescribe != null">process_describe = #{processDescribe},</if>
+            <if test="processImg != null and processImg != ''">process_img = #{processImg},</if>
+            <if test="schoolId != null">school_id = #{schoolId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProfessionById" parameterType="Long">
+        update profession set del_flag = 1 where id = #{id}
+    </delete>
+
+    <delete id="deleteProfessionByIds" parameterType="String">
+        update profession set del_flag = 1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

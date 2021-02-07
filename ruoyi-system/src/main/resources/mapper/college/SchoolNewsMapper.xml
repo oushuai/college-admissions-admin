@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.college.mapper.SchoolNewsMapper">
+    
+    <resultMap type="SchoolNews" id="SchoolNewsResult">
+        <result property="id"    column="id"    />
+        <result property="newsContent"    column="news_content"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="contentTitle"    column="content_title"    />
+    </resultMap>
+
+    <sql id="selectSchoolNewsVo">
+        select id, news_content, del_flag, create_date, content_title from school_news
+    </sql>
+
+    <select id="selectSchoolNewsList" parameterType="SchoolNews" resultMap="SchoolNewsResult">
+        <include refid="selectSchoolNewsVo"/>
+        <where>  
+            <if test="newsContent != null  and newsContent != ''"> and news_content = #{newsContent}</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="contentTitle != null  and contentTitle != ''"> and content_title = #{contentTitle}</if>
+        </where>
+    </select>
+    
+    <select id="selectSchoolNewsById" parameterType="Integer" resultMap="SchoolNewsResult">
+        <include refid="selectSchoolNewsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSchoolNews" parameterType="SchoolNews" useGeneratedKeys="true" keyProperty="id">
+        insert into school_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsContent != null">news_content,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="contentTitle != null">content_title,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsContent != null">#{newsContent},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="contentTitle != null">#{contentTitle},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchoolNews" parameterType="SchoolNews">
+        update school_news
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="newsContent != null">news_content = #{newsContent},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="contentTitle != null">content_title = #{contentTitle},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolNewsById" parameterType="Integer">
+        delete from school_news where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolNewsByIds" parameterType="String">
+        delete from school_news where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

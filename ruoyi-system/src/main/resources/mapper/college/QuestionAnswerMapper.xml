@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.college.mapper.QuestionAnswerMapper">
+    
+    <resultMap type="QuestionAnswer" id="QuestionAnswerResult">
+        <result property="id"    column="id"    />
+        <result property="qa"    column="qa"    />
+        <result property="userId"    column="user_id"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectQuestionAnswerVo">
+        select id, qa, user_id, create_date, del_flag, status from question_answer
+    </sql>
+
+    <select id="selectQuestionAnswerList" parameterType="QuestionAnswer" resultMap="QuestionAnswerResult">
+        <include refid="selectQuestionAnswerVo"/>
+        <where>  
+            <if test="qa != null  and qa != ''"> and qa = #{qa}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectQuestionAnswerById" parameterType="Long" resultMap="QuestionAnswerResult">
+        <include refid="selectQuestionAnswerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertQuestionAnswer" parameterType="QuestionAnswer" useGeneratedKeys="true" keyProperty="id">
+        insert into question_answer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="qa != null">qa,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="qa != null">#{qa},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQuestionAnswer" parameterType="QuestionAnswer">
+        update question_answer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="qa != null">qa = #{qa},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteQuestionAnswerById" parameterType="Long">
+        delete from question_answer where id = #{id}
+    </delete>
+
+    <delete id="deleteQuestionAnswerByIds" parameterType="String">
+        delete from question_answer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.college.mapper.FocusMapper">
+    
+    <resultMap type="Focus" id="FocusResult">
+        <result property="id"    column="id"    />
+        <result property="img"    column="img"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectFocusVo">
+        select id, img, del_flag from focus
+    </sql>
+
+    <select id="selectFocusList" parameterType="Focus" resultMap="FocusResult">
+        <include refid="selectFocusVo"/>
+        <where>  
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+        </where>
+    </select>
+    
+    <select id="selectFocusById" parameterType="Long" resultMap="FocusResult">
+        <include refid="selectFocusVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFocus" parameterType="Focus" useGeneratedKeys="true" keyProperty="id">
+        insert into focus
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="img != null">img,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="img != null">#{img},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFocus" parameterType="Focus">
+        update focus
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="img != null">img = #{img},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFocusById" parameterType="Long">
+        delete from focus where id = #{id}
+    </delete>
+
+    <delete id="deleteFocusByIds" parameterType="String">
+        delete from focus where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

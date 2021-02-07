@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.college.mapper.SchoolMapper">
+    
+    <resultMap type="School" id="SchoolResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="lego"    column="lego"    />
+        <result property="coverImg"    column="cover_img"    />
+        <result property="shortIntroduction"    column="short_introduction"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="ranking"    column="ranking"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectSchoolVo">
+        select id, name, lego, cover_img, short_introduction, introduction, ranking, del_flag from school
+    </sql>
+
+    <select id="selectSchoolList" parameterType="School" resultMap="SchoolResult">
+        <include refid="selectSchoolVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="lego != null  and lego != ''"> and lego = #{lego}</if>
+            <if test="coverImg != null  and coverImg != ''"> and cover_img = #{coverImg}</if>
+            <if test="shortIntroduction != null  and shortIntroduction != ''"> and short_introduction = #{shortIntroduction}</if>
+            <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>
+            <if test="ranking != null  and ranking != ''"> and ranking = #{ranking}</if>
+        </where>
+    </select>
+    
+    <select id="selectSchoolById" parameterType="String" resultMap="SchoolResult">
+        <include refid="selectSchoolVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSchool" parameterType="School">
+        insert into school
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="lego != null">lego,</if>
+            <if test="coverImg != null">cover_img,</if>
+            <if test="shortIntroduction != null">short_introduction,</if>
+            <if test="introduction != null">introduction,</if>
+            <if test="ranking != null">ranking,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="lego != null">#{lego},</if>
+            <if test="coverImg != null">#{coverImg},</if>
+            <if test="shortIntroduction != null">#{shortIntroduction},</if>
+            <if test="introduction != null">#{introduction},</if>
+            <if test="ranking != null">#{ranking},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchool" parameterType="School">
+        update school
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="lego != null">lego = #{lego},</if>
+            <if test="coverImg != null">cover_img = #{coverImg},</if>
+            <if test="shortIntroduction != null">short_introduction = #{shortIntroduction},</if>
+            <if test="introduction != null">introduction = #{introduction},</if>
+            <if test="ranking != null">ranking = #{ranking},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolById" parameterType="String">
+        delete from school where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolByIds" parameterType="String">
+        delete from school where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
