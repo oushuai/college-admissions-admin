@@ -15,8 +15,8 @@
                                 <input type="text" name="userId"/>
                             </li>
                             <li>
-                                <label>创建事件：</label>
-                                <input type="text" class="time-input" placeholder="请选择创建事件" name="createDate"/>
+                                <label>创建时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择创建时间" name="createDate"/>
                             </li>
                             <li>
                                 <label>0-问题，1-答案：</label>
@@ -89,7 +89,16 @@
                 },
                 {
                     field: 'status',
-                    title: '0-问题，1-答案'
+                    title: '问题/答案',
+                    formatter: function(value) {
+                        // 图片预览（注意：如存储在本地直接获取数据库路径，如有配置context-path需要使用ctx+路径）
+                        // 如：/profile/upload/2019/08/08/3b7a839aced67397bac694d77611ce72.png
+                        if(value  == 0){
+                            return '问题';
+                        }else {
+                            return '答案';
+                        }
+                    }
                 },
                 {
                     title: '操作',

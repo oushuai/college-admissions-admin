@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.college.mapper.QuestionAnswerAssociationMapper">
+    
+    <resultMap type="QuestionAnswerAssociation" id="QuestionAnswerAssociationResult">
+        <result property="questionId"    column="question_id"    />
+        <result property="answerId"    column="answer_id"    />
+    </resultMap>
+
+    <sql id="selectQuestionAnswerAssociationVo">
+        select question_id, answer_id from question_answer_association
+    </sql>
+
+    <select id="selectQuestionAnswerAssociationList" parameterType="QuestionAnswerAssociation" resultMap="QuestionAnswerAssociationResult">
+        <include refid="selectQuestionAnswerAssociationVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectQuestionAnswerAssociationByQuestionId" parameterType="Long" resultMap="QuestionAnswerAssociationResult">
+        <include refid="selectQuestionAnswerAssociationVo"/>
+        where question_id = #{questionId}
+    </select>
+        
+    <insert id="insertQuestionAnswerAssociation" parameterType="QuestionAnswerAssociation">
+        insert into question_answer_association
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionId != null">question_id,</if>
+            <if test="answerId != null">answer_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="questionId != null">#{questionId},</if>
+            <if test="answerId != null">#{answerId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQuestionAnswerAssociation" parameterType="QuestionAnswerAssociation">
+        update question_answer_association
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="answerId != null">answer_id = #{answerId},</if>
+        </trim>
+        where question_id = #{questionId}
+    </update>
+
+    <delete id="deleteQuestionAnswerAssociationById" parameterType="Long">
+        delete from question_answer_association where question_id = #{questionId}
+    </delete>
+
+    <delete id="deleteQuestionAnswerAssociationByIds" parameterType="String">
+        delete from question_answer_association where question_id in 
+        <foreach item="questionId" collection="array" open="(" separator="," close=")">
+            #{questionId}
+        </foreach>
+    </delete>
+
+</mapper>

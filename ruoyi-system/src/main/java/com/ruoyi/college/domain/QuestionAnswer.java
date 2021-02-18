@@ -1,6 +1,8 @@
 package com.ruoyi.college.domain;
 
 import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -39,6 +41,16 @@ public class QuestionAnswer extends BaseEntity
     /** 0-问题，1-答案 */
     @Excel(name = "0-问题，1-答案")
     private Integer status;
+
+    public List<QuestionAnswer> getQuestionAnswers() {
+        return questionAnswers;
+    }
+
+    public void setQuestionAnswers(List<QuestionAnswer> questionAnswers) {
+        this.questionAnswers = questionAnswers;
+    }
+
+    private List<QuestionAnswer> questionAnswers;
 
     public void setId(Long id) 
     {
@@ -104,6 +116,7 @@ public class QuestionAnswer extends BaseEntity
             .append("createDate", getCreateDate())
             .append("delFlag", getDelFlag())
             .append("status", getStatus())
+            .append("questionAnswers",getQuestionAnswers())
             .toString();
     }
 }

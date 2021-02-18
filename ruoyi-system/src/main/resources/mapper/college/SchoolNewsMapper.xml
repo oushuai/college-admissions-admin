@@ -35,13 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="newsContent != null">news_content,</if>
             <if test="delFlag != null">del_flag,</if>
-            <if test="createDate != null">create_date,</if>
+            create_date
             <if test="contentTitle != null">content_title,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="newsContent != null">#{newsContent},</if>
             <if test="delFlag != null">#{delFlag},</if>
-            <if test="createDate != null">#{createDate},</if>
+            sysdate(),
             <if test="contentTitle != null">#{contentTitle},</if>
          </trim>
     </insert>
@@ -51,7 +51,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="newsContent != null">news_content = #{newsContent},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
-            <if test="createDate != null">create_date = #{createDate},</if>
             <if test="contentTitle != null">content_title = #{contentTitle},</if>
         </trim>
         where id = #{id}

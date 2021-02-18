@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.college;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,33 @@ public class QuestionAnswerController extends BaseController
         startPage();
         List<QuestionAnswer> list = questionAnswerService.selectQuestionAnswerList(questionAnswer);
         return getDataTable(list);
+    }
+
+    /*门户展示列表，做一层封装，第一个为问题，后面的为答案*/
+    @PostMapping("/web/info")
+    @ResponseBody
+    public TableDataInfo info(QuestionAnswer questionAnswer)
+    {
+        startPage();
+        List<QuestionAnswer> list=new ArrayList<>();
+        QuestionAnswer questionAnswer1 = questionAnswerService.selectQuestionAnswerListByQuestionId(questionAnswer);
+        list.add(questionAnswer1);
+        return getDataTable(list);
+    }
+
+    /*门户展示列表，做一层封装，第一个为问题，后面的为答案*/
+    @PostMapping("/web/list")
+    @ResponseBody
+    public TableDataInfo webList(QuestionAnswer questionAnswer)
+    {
+        startPage();
+        List<QuestionAnswer> list = questionAnswerService.selectQuestionAnswerList(questionAnswer);
+        List<QuestionAnswer> questionAnswers=new ArrayList<>();
+        for(QuestionAnswer qa :list){
+            QuestionAnswer questionAnswer1 = questionAnswerService.selectQuestionAnswerListByQuestionId(qa);
+            questionAnswers.add(questionAnswer1);
+        }
+        return getDataTable(questionAnswers);
     }
 
     /**

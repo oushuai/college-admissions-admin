@@ -58,4 +58,12 @@ public interface IQuestionAnswerService
      * @return 结果
      */
     public int deleteQuestionAnswerById(Long id);
+
+    /**
+     * 查询问答列表
+     *
+     * @param questionAnswer 问答
+     * @return 问答集合
+     */
+    public QuestionAnswer selectQuestionAnswerListByQuestionId(QuestionAnswer questionAnswer);
 }

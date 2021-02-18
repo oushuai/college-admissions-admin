@@ -1,6 +1,11 @@
 package com.ruoyi.college.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.ruoyi.college.domain.QuestionAnswerAssociation;
+import com.ruoyi.college.mapper.QuestionAnswerAssociationMapper;
+import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.college.mapper.QuestionAnswerMapper;
@@ -19,6 +24,9 @@ public class QuestionAnswerServiceImpl implements IQuestionAnswerService
 {
     @Autowired
     private QuestionAnswerMapper questionAnswerMapper;
+
+    @Autowired
+    private QuestionAnswerAssociationMapper questionAnswerAssociationMapper;
 
     /**
      * 查询问答
@@ -90,5 +98,25 @@ public class QuestionAnswerServiceImpl implements IQuestionAnswerService
     public int deleteQuestionAnswerById(Long id)
     {
         return questionAnswerMapper.deleteQuestionAnswerById(id);
+    }
+
+    /**
+     * 查询问答列表
+     *
+     * @param questionAnswer 问答
+     * @return 问答集合
+     */
+    @Override
+    public QuestionAnswer selectQuestionAnswerListByQuestionId(QuestionAnswer questionAnswer){
+        //如果问题有回复就返回,否则返回空串
+        if(null !=questionAnswer && null !=questionAnswer.getId()) {
+            questionAnswer = questionAnswerMapper.selectQuestionAnswerById(questionAnswer.getId());
+            List<QuestionAnswerAssociation> questionAnswerAssociationList =questionAnswerAssociationMapper.selectQuestionAnswerAssociationByQuestionId(questionAnswer.getId());
+            List<QuestionAnswer> questionAnswers = questionAnswerAssociationList.stream().map((qa) -> questionAnswerMapper.selectQuestionAnswerById(qa.getAnswerId())).collect(Collectors.toList());
+            questionAnswer.setQuestionAnswers(questionAnswers);
+        } else {
+            questionAnswer.setQa("");
+        }
+            return questionAnswer;
     }
 }

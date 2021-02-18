@@ -2,6 +2,7 @@ package com.ruoyi.web.controller.college;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.ruoyi.college.domain.School;
 import com.ruoyi.college.service.ISchoolService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -99,6 +100,19 @@ public class SchoolController extends BaseController
         School school = schoolService.selectSchoolById(id);
         mmap.put("school", school);
         return prefix + "/edit";
+    }
+
+    /**
+     * 学校详情
+     */
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Object info(@PathVariable("id") String id, ModelMap mmap)
+    {
+        School school = schoolService.selectSchoolById(id);
+        mmap.put("school", school);
+        mmap.addAttribute("school",school);
+        return JSON.toJSON(school);
     }
 
     /**

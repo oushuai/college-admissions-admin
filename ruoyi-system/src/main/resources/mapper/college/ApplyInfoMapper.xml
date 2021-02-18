@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="graduationSchool != null and graduationSchool != ''">graduation_school,</if>
             <if test="midtermScore != null">midterm_score,</if>
             <if test="comment != null">comment,</if>
-            <if test="createDate != null">create_date,</if>
+            create_date
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">#{name},</if>
@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="graduationSchool != null and graduationSchool != ''">#{graduationSchool},</if>
             <if test="midtermScore != null">#{midtermScore},</if>
             <if test="comment != null">#{comment},</if>
-            <if test="createDate != null">#{createDate},</if>
+            sysdate()
          </trim>
     </insert>
 

@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="qa != null  and qa != ''"> and qa = #{qa}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="createDate != null "> and create_date = #{createDate}</if>
-            <if test="status != null "> and status = #{status}</if>
+            and status = 0
         </where>
     </select>
     
@@ -37,14 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="qa != null">qa,</if>
             <if test="userId != null">user_id,</if>
-            <if test="createDate != null">create_date,</if>
+            create_date,
             <if test="delFlag != null">del_flag,</if>
             <if test="status != null">status,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="qa != null">#{qa},</if>
             <if test="userId != null">#{userId},</if>
-            <if test="createDate != null">#{createDate},</if>
+            sysdate(),
             <if test="delFlag != null">#{delFlag},</if>
             <if test="status != null">#{status},</if>
          </trim>
@@ -55,7 +55,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="qa != null">qa = #{qa},</if>
             <if test="userId != null">user_id = #{userId},</if>
-            <if test="createDate != null">create_date = #{createDate},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="status != null">status = #{status},</if>
         </trim>
