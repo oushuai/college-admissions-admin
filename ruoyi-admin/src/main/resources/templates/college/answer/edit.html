@@ -9,19 +9,19 @@
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-answer-edit" th:object="${questionAnswer}">
             <input name="id" th:field="*{id}" type="hidden">
-            <!--<div class="form-group">-->
-                <!--<label class="col-sm-3 control-label">问题&答案：</label>-->
-                <!--<div class="col-sm-8">-->
-                    <!--<textarea name="qa" class="form-control">[[*{qa}]]</textarea>-->
-                <!--</div>-->
-            <!--</div>-->
             <div class="form-group">
                 <label class="col-sm-3 control-label">问题&答案：</label>
                 <div class="col-sm-8">
-                    <input type="hidden" class="form-control" th:field="*{qa}">
-                    <div class="summernote" id="qa"></div>
+                    <textarea name="qa" class="form-control">[[*{qa}]]</textarea>
                 </div>
             </div>
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-3 control-label">问题&答案：</label>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<input type="hidden" class="form-control" th:field="*{qa}">-->
+                    <!--<div class="summernote" id="qa"></div>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="form-group">    
                 <label class="col-sm-3 control-label">用户名：</label>
                 <div class="col-sm-8">

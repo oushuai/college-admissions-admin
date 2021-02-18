@@ -65,5 +65,5 @@ public interface IQuestionAnswerService
      * @param questionAnswer 问答
      * @return 问答集合
      */
-    public QuestionAnswer selectQuestionAnswerListByQuestionId(QuestionAnswer questionAnswer);
+    public QuestionAnswer selectQuestionAnswerListByQuestionId(Long id);
 }

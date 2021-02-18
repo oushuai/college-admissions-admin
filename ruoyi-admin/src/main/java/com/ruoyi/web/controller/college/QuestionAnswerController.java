@@ -56,13 +56,13 @@ public class QuestionAnswerController extends BaseController
     }
 
     /*门户展示列表，做一层封装，第一个为问题，后面的为答案*/
-    @PostMapping("/web/info")
+    @GetMapping("/web/info/{id}")
     @ResponseBody
-    public TableDataInfo info(QuestionAnswer questionAnswer)
+    public TableDataInfo info(@PathVariable Long id)
     {
         startPage();
         List<QuestionAnswer> list=new ArrayList<>();
-        QuestionAnswer questionAnswer1 = questionAnswerService.selectQuestionAnswerListByQuestionId(questionAnswer);
+        QuestionAnswer questionAnswer1 = questionAnswerService.selectQuestionAnswerListByQuestionId(id);
         list.add(questionAnswer1);
         return getDataTable(list);
     }
@@ -76,7 +76,7 @@ public class QuestionAnswerController extends BaseController
         List<QuestionAnswer> list = questionAnswerService.selectQuestionAnswerList(questionAnswer);
         List<QuestionAnswer> questionAnswers=new ArrayList<>();
         for(QuestionAnswer qa :list){
-            QuestionAnswer questionAnswer1 = questionAnswerService.selectQuestionAnswerListByQuestionId(qa);
+            QuestionAnswer questionAnswer1 = questionAnswerService.selectQuestionAnswerListByQuestionId(qa.getId());
             questionAnswers.add(questionAnswer1);
         }
         return getDataTable(questionAnswers);

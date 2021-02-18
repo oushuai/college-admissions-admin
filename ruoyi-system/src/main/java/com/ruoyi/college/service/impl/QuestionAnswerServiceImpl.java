@@ -107,10 +107,11 @@ public class QuestionAnswerServiceImpl implements IQuestionAnswerService
      * @return 问答集合
      */
     @Override
-    public QuestionAnswer selectQuestionAnswerListByQuestionId(QuestionAnswer questionAnswer){
+    public QuestionAnswer selectQuestionAnswerListByQuestionId(Long id){
+        QuestionAnswer questionAnswer = questionAnswerMapper.selectQuestionAnswerById(id);
         //如果问题有回复就返回,否则返回空串
         if(null !=questionAnswer && null !=questionAnswer.getId()) {
-            questionAnswer = questionAnswerMapper.selectQuestionAnswerById(questionAnswer.getId());
+            questionAnswer = questionAnswerMapper.selectQuestionAnswerById(id);
             List<QuestionAnswerAssociation> questionAnswerAssociationList =questionAnswerAssociationMapper.selectQuestionAnswerAssociationByQuestionId(questionAnswer.getId());
             List<QuestionAnswer> questionAnswers = questionAnswerAssociationList.stream().map((qa) -> questionAnswerMapper.selectQuestionAnswerById(qa.getAnswerId())).collect(Collectors.toList());
             questionAnswer.setQuestionAnswers(questionAnswers);

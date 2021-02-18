@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.college;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.college.domain.School;
 import com.ruoyi.college.service.ISchoolService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +95,17 @@ public class ProfessionController extends BaseController
         mmap.put("profession", profession);
         mmap.put("schools", schoolService.selectSchoolList(null));
         return prefix + "/edit";
+    }
+
+    /**
+     * 专业详情
+     */
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Object info(@PathVariable("id") Long id)
+    {
+        Profession profession = professionService.selectProfessionById(id);
+        return JSON.toJSON(profession);
     }
 
     /**
