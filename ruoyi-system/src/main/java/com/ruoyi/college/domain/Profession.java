@@ -37,6 +37,18 @@ public class Profession extends BaseEntity
     @Excel(name = "专业封面图")
     private String processImg;
 
+    public Integer getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(Integer ranking) {
+        this.ranking = ranking;
+    }
+
+    /** 专业排名 */
+    @Excel(name = "专业排名")
+    private Integer ranking;
+
     /** 学校id */
     @Excel(name = "学校id")
     private String schoolId;
@@ -117,6 +129,7 @@ public class Profession extends BaseEntity
             .append("processDescribe", getProcessDescribe())
             .append("processImg", getProcessImg())
             .append("school", getSchool())
+                .append("ranking", getRanking())
             .toString();
     }
 

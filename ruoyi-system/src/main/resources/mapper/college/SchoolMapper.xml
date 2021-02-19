@@ -15,6 +15,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="delFlag"    column="del_flag"    />
     </resultMap>
 
+    <resultMap type="School" id="SchoolwithProfessionResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="lego"    column="lego"    />
+        <result property="coverImg"    column="cover_img"    />
+        <result property="shortIntroduction"    column="short_introduction"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="ranking"    column="ranking"    />
+        <result property="delFlag"    column="del_flag"    />
+        <collection property="professionList" column="id" ofType="collection" resultMap="ProfessionResult1" />
+    </resultMap>
+
+    <resultMap type="Profession" id="ProfessionResult1">
+        <result property="id" column="professionId"/>
+        <result property="name" column="professionName"/>
+        <result property="type" column="type"/>
+        <result property="delFlag" column="profession_del_flag"/>
+        <result property="processDescribe" column="process_describe"/>
+        <result property="processImg" column="process_img"/>
+        <result property="ranking"    column="professionRanking"    />
+        <result property="schoolId" column="school_id"/>
+    </resultMap>
+
+    <select id="selectSchoolListWithProfession" parameterType="School" resultMap="SchoolwithProfessionResult">
+        select s.id, s.name, s.lego, s.cover_img, s.short_introduction, s.introduction, s.ranking, s.del_flag,
+        p.id professionId,p.name professionName,p.process_describe,p.process_img,p.type,p. del_flag profession_del_flag
+        ,p.ranking professionRanking
+        from school s
+        left join profession p
+        on s.id = p.school_id
+        <where>
+            <if test="name != null  and name != ''"> and s.name like concat('%', #{name}, '%')</if>
+            <if test="lego != null  and lego != ''"> and s.lego = #{lego}</if>
+            <if test="coverImg != null  and coverImg != ''"> and s.cover_img = #{coverImg}</if>
+            <if test="shortIntroduction != null  and shortIntroduction != ''"> and s.short_introduction = #{shortIntroduction}</if>
+            <if test="introduction != null  and introduction != ''"> and s.introduction = #{introduction}</if>
+            <if test="ranking != null"> and s.ranking = #{ranking}</if>
+        </where>
+    </select>
+
     <sql id="selectSchoolVo">
         select id, name, lego, cover_img, short_introduction, introduction, ranking, del_flag from school
     </sql>
@@ -27,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="coverImg != null  and coverImg != ''"> and cover_img = #{coverImg}</if>
             <if test="shortIntroduction != null  and shortIntroduction != ''"> and short_introduction = #{shortIntroduction}</if>
             <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>
-            <if test="ranking != null  and ranking != ''"> and ranking = #{ranking}</if>
+            <if test="ranking != null"> and ranking = #{ranking}</if>
         </where>
     </select>
     

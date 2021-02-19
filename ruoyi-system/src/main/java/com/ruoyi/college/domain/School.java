@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.util.List;
+
 /**
  * 学校表对象 school
  * 
@@ -40,10 +42,20 @@ public class School extends BaseEntity
 
     /** 排名 */
     @Excel(name = "排名")
-    private String ranking;
+    private Integer ranking;
 
     /** 是否删除 */
     private Integer delFlag;
+
+    public List<Profession> getProfessionList() {
+        return professionList;
+    }
+
+    public void setProfessionList(List<Profession> professionList) {
+        this.professionList = professionList;
+    }
+
+    private List<Profession> professionList;
 
     public void setId(String id) 
     {
@@ -99,12 +111,12 @@ public class School extends BaseEntity
     {
         return introduction;
     }
-    public void setRanking(String ranking) 
+    public void setRanking(Integer ranking)
     {
         this.ranking = ranking;
     }
 
-    public String getRanking() 
+    public Integer getRanking()
     {
         return ranking;
     }
@@ -129,6 +141,7 @@ public class School extends BaseEntity
             .append("introduction", getIntroduction())
             .append("ranking", getRanking())
             .append("delFlag", getDelFlag())
-            .toString();
+                .append("professionList", getProfessionList())
+                .toString();
     }
 }

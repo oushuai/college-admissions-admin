@@ -27,6 +27,8 @@ public interface ISchoolService
      */
     public List<School> selectSchoolList(School school);
 
+
+    public List<School> selectSchoolListWithProfession(School school);
     /**
      * 新增学校表
      * 

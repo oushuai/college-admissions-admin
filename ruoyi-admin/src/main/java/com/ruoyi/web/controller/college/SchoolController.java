@@ -56,6 +56,16 @@ public class SchoolController extends BaseController
         return getDataTable(list);
     }
 
+    //带专业
+    @PostMapping("/list1")
+    @ResponseBody
+    public TableDataInfo list1(School school)
+    {
+        startPage();
+        List<School> list = schoolService.selectSchoolListWithProfession(school);
+        return getDataTable(list);
+    }
+
     /**
      * 导出学校表列表
      */

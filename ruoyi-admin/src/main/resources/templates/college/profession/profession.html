@@ -71,9 +71,19 @@
                     field: 'name',
                     title: '专业名称'
                 },
+                    {
+                        field: 'ranking',
+                        title: '专业排名'
+                    },
                 {
                     field: 'processDescribe',
-                    title: '专业描述'
+                    title: '专业描述',
+                    formatter: function(value, row, index) {
+                        if(value.length>30){
+                            value=value.substring(0,30)+"...\t";
+                        }
+                        return value;
+                    }
                 },
                 {
                     field: 'processImg',
