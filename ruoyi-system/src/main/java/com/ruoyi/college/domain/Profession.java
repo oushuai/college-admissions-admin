@@ -37,6 +37,17 @@ public class Profession extends BaseEntity
     @Excel(name = "专业封面图")
     private String processImg;
 
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    @Excel(name = "专业封面图")
+    private Integer year;
+
     public Integer getRanking() {
         return ranking;
     }
@@ -130,6 +141,7 @@ public class Profession extends BaseEntity
             .append("processImg", getProcessImg())
             .append("school", getSchool())
                 .append("ranking", getRanking())
+            .append("year",getYear())
             .toString();
     }
 

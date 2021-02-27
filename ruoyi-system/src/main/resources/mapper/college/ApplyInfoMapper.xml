@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="schoolId != null">school_id,</if>
             <if test="professionId != null">profession_id,</if>
             <if test="studentType != null">student_type,</if>
-            <if test="graduationSchool != null and graduationSchool != ''">graduation_school,</if>
+            <if test="graduationSchool != null">graduation_school,</if>
             <if test="midtermScore != null">midterm_score,</if>
             <if test="comment != null">comment,</if>
             create_date
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="schoolId != null">#{schoolId},</if>
             <if test="professionId != null">#{professionId},</if>
             <if test="studentType != null">#{studentType},</if>
-            <if test="graduationSchool != null and graduationSchool != ''">#{graduationSchool},</if>
+            <if test="graduationSchool != null">#{graduationSchool},</if>
             <if test="midtermScore != null">#{midtermScore},</if>
             <if test="comment != null">#{comment},</if>
             sysdate()
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="schoolId != null">school_id = #{schoolId},</if>
             <if test="professionId != null">profession_id = #{professionId},</if>
             <if test="studentType != null">student_type = #{studentType},</if>
-            <if test="graduationSchool != null and graduationSchool != ''">graduation_school = #{graduationSchool},</if>
+            <if test="graduationSchool != null">graduation_school = #{graduationSchool},</if>
             <if test="midtermScore != null">midterm_score = #{midtermScore},</if>
             <if test="comment != null">comment = #{comment},</if>
             <if test="createDate != null">create_date = #{createDate},</if>

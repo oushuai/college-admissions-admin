@@ -53,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="introduction != null  and introduction != ''"> and s.introduction = #{introduction}</if>
             <if test="ranking != null"> and s.ranking = #{ranking}</if>
         </where>
+        order by s.ranking
     </select>
 
     <sql id="selectSchoolVo">
@@ -69,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>
             <if test="ranking != null"> and ranking = #{ranking}</if>
         </where>
+        order by ranking
     </select>
     
     <select id="selectSchoolById" parameterType="String" resultMap="SchoolResult">

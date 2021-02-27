@@ -64,10 +64,22 @@
                     title: '',
                     visible: false
                 },
-                {
-                    field: 'img',
-                    title: '轮播图片'
-                },
+                        {
+                            field: 'img',
+                            title: '轮播图片',
+                            formatter: function(value, row, index) {
+                                // 图片预览（注意：如存储在本地直接获取数据库路径，如有配置context-path需要使用ctx+路径）
+                                // 如：/profile/upload/2019/08/08/3b7a839aced67397bac694d77611ce72.png
+                                if(null!=value){
+                                    value=value.replace(/^(http|https):\/\/[^/]+/,'');
+                                }
+                                if(index % 2 == 0){
+                                    return $.table.imageView(value);
+                                }else {
+                                    return $.table.imageView(value);
+                                }
+                            }
+                        },
                 {
                     title: '操作',
                     align: 'center',

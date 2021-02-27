@@ -12,6 +12,7 @@
         <result property="processDescribe" column="process_describe"/>
         <result property="processImg" column="process_img"/>
         <result property="ranking"    column="ranking"    />
+        <result property="year"    column="year"    />
         <result property="schoolId" column="school_id"/>
         <association property="school" column="school_id" javaType="Profession" resultMap="SchoolResult"/>
     </resultMap>
@@ -29,7 +30,7 @@
     </resultMap>
 
     <sql id="selectProfessionVo">
-    select p.id,p.name,p.type,p.del_flag,p.process_describe,p.process_img,p.ranking,p.school_id,
+    select p.id,p.name,p.type,p.del_flag,p.process_describe,p.process_img,p.ranking,p.year,p.school_id,
         s.id schoolId,s.name schoolName,s.lego,s.cover_img,s.short_introduction,s.introduction,s.ranking,s.del_flag
         from profession p
         left join school s
@@ -43,8 +44,9 @@
         <if test="processDescribe != null  and processDescribe != ''">and p.process_describe = #{processDescribe}</if>
         <if test="processImg != null  and processImg != ''">and p.process_img = #{processImg}</if>
         <if test="ranking != null">and p.ranking = #{ranking}</if>
+        <if test="year != null">and p.year = #{year}</if>
         <if test="schoolId != null  and schoolId != ''">and s.id = #{schoolId}</if>
-
+        order by p.ranking
     </select>
 
     <select id="selectProfessionById" parameterType="Long" resultMap="ProfessionResult">
@@ -60,6 +62,7 @@
             <if test="processDescribe != null">process_describe,</if>
             <if test="processImg != null and processImg != ''">process_img,</if>
             <if test="ranking != null">ranking,</if>
+            <if test="year != null">year,</if>
             <if test="schoolId != null">school_id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -68,6 +71,7 @@
             <if test="processDescribe != null">#{processDescribe},</if>
             <if test="processImg != null and processImg != ''">#{processImg},</if>
             <if test="ranking != null">#{ranking},</if>
+            <if test="year != null">#{year},</if>
             <if test="schoolId != null">#{schoolId},</if>
         </trim>
     </insert>
@@ -80,7 +84,8 @@
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="processDescribe != null">process_describe = #{processDescribe},</if>
             <if test="processImg != null and processImg != ''">process_img = #{processImg},</if>
-            <if test="ranking != null">#{ranking},</if>
+            <if test="ranking != null">ranking = #{ranking},</if>
+            <if test="year != null">year= #{year},</if>
             <if test="schoolId != null">school_id = #{schoolId},</if>
         </trim>
         where id = #{id}

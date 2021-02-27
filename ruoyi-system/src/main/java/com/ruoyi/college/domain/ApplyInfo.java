@@ -57,7 +57,7 @@ public class ApplyInfo extends BaseEntity
     private Integer midtermScore;
 
     /** 分数 */
-    @Excel(name = "分数")
+    @Excel(name = "备注")
     private String comment;
 
     /** 创建日期 */
