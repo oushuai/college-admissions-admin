@@ -193,16 +193,18 @@
             var  contain ;
             if(null==id || id==''){
                 $("#professionId").empty();
-                contain+="<option id = \"\">请选择</option>";
+                contain+="<option id = \"\" value=\"\">请选择</option>";
                 $("#professionId").html(contain);
                 return;
             }
             $.get(ctx+"college/school/"+id,function (data){
                 if(data.professionList.length==0){
-                    contain+="<option id = \"\">--请选择--</option>";
+                    contain+="<option id = \"\" value=\"\">--请选择--</option>";
                 }
                 for ( var i = 0; i<data.professionList.length;i++ ){
                     contain += "<option id = ";
+                    contain += data.professionList[i].id;
+                    contain+=" value = ";
                     contain += data.professionList[i].id;
                     contain += ">";
                     contain += data.professionList[i].name;
