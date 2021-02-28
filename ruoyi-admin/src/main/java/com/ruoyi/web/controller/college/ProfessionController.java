@@ -81,7 +81,6 @@ public class ProfessionController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Profession profession)
     {
-        System.out.println("aa");
         return toAjax(professionService.insertProfession(profession));
     }
 

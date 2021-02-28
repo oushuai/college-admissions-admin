@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="qa != null  and qa != ''"> and qa = #{qa}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="createDate != null "> and date_format(create_date,'%Y%m%d')= date_format(#{createDate},'%Y%m%d') </if>
             and status = 0
         </where>
     </select>

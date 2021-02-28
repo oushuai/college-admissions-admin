@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="graduationSchool != null  and graduationSchool != ''"> and graduation_school = #{graduationSchool}</if>
             <if test="midtermScore != null "> and midterm_score = #{midtermScore}</if>
             <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
-            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="createDate != null "> and date_format(create_date,'%Y%m%d')= date_format(#{createDate},'%Y%m%d') </if>
         </where>
     </select>
     

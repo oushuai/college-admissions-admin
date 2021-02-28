@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectSchoolNewsList" parameterType="SchoolNews" resultMap="SchoolNewsResult">
         <include refid="selectSchoolNewsVo"/>
         <where>  
-            <if test="newsContent != null  and newsContent != ''"> and news_content = #{newsContent}</if>
-            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="newsContent != null  and newsContent != ''"> and news_content like concat('%', #{newsContent}, '%')</if>
+            <if test="createDate != null "> and date_format(create_date,'%Y%m%d')= date_format(#{createDate},'%Y%m%d') </if>
             <if test="contentTitle != null  and contentTitle != ''"> and content_title = #{contentTitle}</if>
         </where>
     </select>

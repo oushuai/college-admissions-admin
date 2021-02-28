@@ -68,17 +68,23 @@
                     title: '',
                     visible: false
                 },
+                    {
+                        field: 'contentTitle',
+                        title: '文章标题'
+                    },
                 {
                     field: 'newsContent',
-                    title: '文章内容'
+                    title: '文章内容',
+                    formatter: function(value) {
+                        if(value.length>50){
+                            value=value.substring(0,50)+"...\t";
+                        }
+                        return value;
+                    }
                 },
                 {
                     field: 'createDate',
                     title: '创建时间'
-                },
-                {
-                    field: 'contentTitle',
-                    title: '文章标题'
                 },
                 {
                     title: '操作',

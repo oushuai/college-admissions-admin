@@ -1,6 +1,9 @@
 package com.ruoyi.web.controller.college;
 
 import java.util.List;
+
+import com.ruoyi.college.service.IProfessionService;
+import com.ruoyi.college.service.ISchoolService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +37,17 @@ public class ApplyInfoController extends BaseController
     @Autowired
     private IApplyInfoService applyInfoService;
 
+    @Autowired
+    private ISchoolService schoolService;
+
+    @Autowired
+    private IProfessionService professionService;
+
     //@RequiresPermissions("college:applyInfo:view")
     @GetMapping()
-    public String applyInfo()
+    public String applyInfo(ModelMap mmap)
     {
+        mmap.addAttribute("schools",schoolService.selectSchoolList(null));
         return prefix + "/applyInfo";
     }
 
@@ -51,6 +61,10 @@ public class ApplyInfoController extends BaseController
     {
         startPage();
         List<ApplyInfo> list = applyInfoService.selectApplyInfoList(applyInfo);
+         list.stream().forEach(applyInfo1 -> {
+            applyInfo1.setSchool(schoolService.selectSchoolById(applyInfo1.getSchoolId()));
+            applyInfo1.setProfession(professionService.selectProfessionById(applyInfo1.getProfessionId()));
+        });
         return getDataTable(list);
     }
 

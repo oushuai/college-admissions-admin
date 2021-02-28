@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="introduction != null  and introduction != ''"> and s.introduction = #{introduction}</if>
             <if test="ranking != null"> and s.ranking = #{ranking}</if>
         </where>
-        order by s.ranking
+        order by s.ranking,p.ranking
     </select>
 
     <sql id="selectSchoolVo">
@@ -73,9 +73,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by ranking
     </select>
     
-    <select id="selectSchoolById" parameterType="String" resultMap="SchoolResult">
-        <include refid="selectSchoolVo"/>
-        where id = #{id}
+    <select id="selectSchoolById" parameterType="String" resultMap="SchoolwithProfessionResult">
+        select s.id, s.name, s.lego, s.cover_img, s.short_introduction, s.introduction, s.ranking, s.del_flag,
+        p.id professionId,p.name professionName,p.process_describe,p.process_img,p.type,p. del_flag profession_del_flag
+        ,p.ranking professionRanking
+        from school s
+        left join profession p
+        on s.id = p.school_id
+        where s.id = #{id}
     </select>
         
     <insert id="insertSchool" parameterType="School">

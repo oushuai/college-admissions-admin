@@ -65,6 +65,26 @@ public class ApplyInfo extends BaseEntity
     @Excel(name = "创建日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date createDate;
 
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public Profession getProfession() {
+        return profession;
+    }
+
+    public void setProfession(Profession profession) {
+        this.profession = profession;
+    }
+
+    private School school;
+
+    private Profession profession;
+
     public void setId(Long id) 
     {
         this.id = id;
@@ -189,6 +209,8 @@ public class ApplyInfo extends BaseEntity
             .append("midtermScore", getMidtermScore())
             .append("comment", getComment())
             .append("createDate", getCreateDate())
+            .append("school",getSchool())
+            .append("profession",getProfession())
             .toString();
     }
 }

@@ -3,7 +3,9 @@ package com.ruoyi.web.controller.college;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
+import com.ruoyi.college.domain.Profession;
 import com.ruoyi.college.domain.School;
+import com.ruoyi.college.service.IProfessionService;
 import com.ruoyi.college.service.ISchoolService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class SchoolController extends BaseController
 
     @Autowired
     private ISchoolService schoolService;
+
+    @Autowired
+    private IProfessionService professionService;
 
     //@RequiresPermissions("college:school:view")
     @GetMapping()
@@ -120,6 +125,8 @@ public class SchoolController extends BaseController
     public Object info(@PathVariable("id") String id, ModelMap mmap)
     {
         School school = schoolService.selectSchoolById(id);
+//        List<Profession> professions = professionService.selectProfessionBySchoolId(id);
+//        school.setProfessionList(professions);
         mmap.put("school", school);
         mmap.addAttribute("school",school);
         return JSON.toJSON(school);

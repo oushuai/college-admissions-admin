@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.college;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.college.domain.School;
 import com.ruoyi.college.domain.SchoolNews;
 import com.ruoyi.college.service.ISchoolNewsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -54,6 +56,16 @@ public class SchoolNewsController extends BaseController
         startPage();
         List<SchoolNews> list = schoolNewsService.selectSchoolNewsList(schoolNews);
         return getDataTable(list);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Object info(@PathVariable("id") Integer id, ModelMap mmap)
+    {
+        SchoolNews news = schoolNewsService.selectSchoolNewsById(id);
+        mmap.put("news", news);
+        mmap.addAttribute("news",news);
+        return JSON.toJSON(news);
     }
 
     /**
