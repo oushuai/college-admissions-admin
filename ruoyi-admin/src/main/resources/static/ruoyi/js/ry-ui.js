@@ -632,6 +632,10 @@ var table = {
     	form: {
             // 表单重置
             reset: function(formId, tableId) {
+                $("#professionId").empty();
+               var contain;
+                contain+="<option id = \"\" value=\"\">请选择</option>";
+                $("#professionId").html(contain);
                 table.set(tableId);
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	$("#" + currentId)[0].reset();
