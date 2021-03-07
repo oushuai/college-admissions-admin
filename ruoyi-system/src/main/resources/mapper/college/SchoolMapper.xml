@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="lego != null  and lego != ''"> and lego = #{lego}</if>
             <if test="coverImg != null  and coverImg != ''"> and cover_img = #{coverImg}</if>
-            <if test="shortIntroduction != null  and shortIntroduction != ''"> and short_introduction = #{shortIntroduction}</if>
+            <if test="shortIntroduction != null  and shortIntroduction != ''"> and short_introduction like concat('%', #{shortIntroduction}, '%')</if>
             <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>
             <if test="ranking != null"> and ranking = #{ranking}</if>
             and del_flag = 0
