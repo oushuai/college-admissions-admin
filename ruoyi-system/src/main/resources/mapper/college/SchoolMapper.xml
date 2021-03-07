@@ -69,6 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="shortIntroduction != null  and shortIntroduction != ''"> and short_introduction = #{shortIntroduction}</if>
             <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>
             <if test="ranking != null"> and ranking = #{ranking}</if>
+            and del_flag = 0
         </where>
         order by ranking
     </select>
@@ -122,11 +123,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteSchoolById" parameterType="String">
-        delete from school where id = #{id}
+        update school set del_flag = 2 where id = #{id}
     </delete>
 
     <delete id="deleteSchoolByIds" parameterType="String">
-        delete from school where id in 
+        update school set del_flag = 2 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

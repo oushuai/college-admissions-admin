@@ -92,11 +92,11 @@
     </update>
 
     <delete id="deleteProfessionById" parameterType="Long">
-        update profession set del_flag = 1 where id = #{id}
+        update profession set del_flag = 2 where id = #{id}
     </delete>
 
     <delete id="deleteProfessionByIds" parameterType="String">
-        update profession set del_flag = 1 where id in
+        update profession set del_flag = 2 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

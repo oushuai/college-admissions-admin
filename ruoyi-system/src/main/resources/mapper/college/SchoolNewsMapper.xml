@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="newsContent != null  and newsContent != ''"> and news_content like concat('%', #{newsContent}, '%')</if>
             <if test="createDate != null "> and date_format(create_date,'%Y%m%d')= date_format(#{createDate},'%Y%m%d') </if>
-            <if test="contentTitle != null  and contentTitle != ''"> and content_title = #{contentTitle}</if>
+            <if test="contentTitle != null  and contentTitle != ''"> and content_title like concat('%', #{contentTitle}, '%')</if>
+            and del_flag = 0
         </where>
     </select>
     
@@ -57,11 +58,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteSchoolNewsById" parameterType="Integer">
-        delete from school_news where id = #{id}
+        update school_news set del_flag = 2 where id = #{id}
     </delete>
 
     <delete id="deleteSchoolNewsByIds" parameterType="String">
-        delete from school_news where id in 
+        update school_news set del_flag = 2 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

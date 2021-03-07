@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectFocusVo"/>
         <where>  
             <if test="img != null  and img != ''"> and img = #{img}</if>
+            and del_flag = 0
         </where>
     </select>
     
@@ -48,11 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteFocusById" parameterType="Long">
-        delete from focus where id = #{id}
+        update focus set del_flag = 2 where id = #{id}
     </delete>
 
     <delete id="deleteFocusByIds" parameterType="String">
-        delete from focus where id in 
+        update focus set del_flag = 2 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
