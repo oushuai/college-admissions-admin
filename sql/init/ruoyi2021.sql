@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 07/03/2021 11:43:32
+ Date: 07/03/2021 11:46:49
 */
 
 SET NAMES utf8mb4;
@@ -609,6 +609,10 @@ INSERT INTO `sys_logininfor` VALUES (154, 'sysadmin', '127.0.0.1', '内网IP', '
 INSERT INTO `sys_logininfor` VALUES (155, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-07 11:14:29');
 INSERT INTO `sys_logininfor` VALUES (156, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-07 11:14:32');
 INSERT INTO `sys_logininfor` VALUES (157, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-07 11:32:53');
+INSERT INTO `sys_logininfor` VALUES (158, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-07 11:45:49');
+INSERT INTO `sys_logininfor` VALUES (159, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2021-03-07 11:46:09');
+INSERT INTO `sys_logininfor` VALUES (160, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-07 11:46:14');
+INSERT INTO `sys_logininfor` VALUES (161, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-07 11:46:16');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -977,6 +981,7 @@ INSERT INTO `sys_oper_log` VALUES (266, '角色管理', 2, 'com.ruoyi.web.contro
 INSERT INTO `sys_oper_log` VALUES (267, '重置密码', 2, 'com.ruoyi.web.controller.system.SysUserController.resetPwdSave()', 'POST', 1, 'admin', '研发部门', '/system/user/resetPwd', '127.0.0.1', '内网IP', '{\"userId\":[\"2\"],\"loginName\":[\"sysadmin\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-07 11:00:05');
 INSERT INTO `sys_oper_log` VALUES (268, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.update()', 'POST', 1, 'sysadmin', '测试部门', '/system/user/profile/update', '127.0.0.1', '内网IP', '{\"id\":[\"\"],\"userName\":[\"管理员\"],\"phonenumber\":[\"15666666666\"],\"email\":[\"test@qq.com\"],\"sex\":[\"1\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-07 11:06:03');
 INSERT INTO `sys_oper_log` VALUES (269, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updateAvatar()', 'POST', 1, 'sysadmin', '测试部门', '/system/user/profile/updateAvatar', '127.0.0.1', '内网IP', NULL, '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-07 11:06:35');
+INSERT INTO `sys_oper_log` VALUES (270, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/role/edit', '127.0.0.1', '内网IP', '{\"roleId\":[\"2\"],\"roleName\":[\"普通角色\"],\"roleKey\":[\"common\"],\"roleSort\":[\"2\"],\"status\":[\"0\"],\"remark\":[\"普通角色\"],\"menuIds\":[\"2000,2001,2002,2003,2004,2005,2006,2007,2008,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2031,2032,2033,2034,2035,2036\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-07 11:46:06');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1028,7 +1033,7 @@ CREATE TABLE `sys_role`  (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', '0', '0', 'admin', '2021-01-06 21:43:53', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', '0', '0', 'admin', '2021-01-06 21:43:53', 'admin', '2021-03-07 10:59:16', '普通角色');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', '0', '0', 'admin', '2021-01-06 21:43:53', 'admin', '2021-03-07 11:46:06', '普通角色');
 INSERT INTO `sys_role` VALUES (100, '测试用户', 'test', 3, '1', '0', '0', 'admin', '2021-01-16 18:31:07', '', NULL, NULL);
 
 -- ----------------------------
@@ -1187,8 +1192,8 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '管理员', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2021-03-07 11:10:10', '2021-01-06 21:43:53', 'admin', '2021-01-06 21:43:53', '', '2021-03-07 11:10:09', '管理员');
-INSERT INTO `sys_user` VALUES (2, 105, 'sysadmin', '管理员', '00', 'test@qq.com', '15666666666', '1', '/profile/avatar/2021/03/07/12dd06a2-8e41-4361-8d68-9883a0c7e002.png', '20dd7f492aca23132b0d5b99c3210058', '9c4f05', '0', '0', '127.0.0.1', '2021-03-07 11:32:53', '2021-01-06 21:43:53', 'admin', '2021-01-06 21:43:53', '', '2021-03-07 11:32:53', '测试员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '管理员', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2021-03-07 11:45:49', '2021-01-06 21:43:53', 'admin', '2021-01-06 21:43:53', '', '2021-03-07 11:45:49', '管理员');
+INSERT INTO `sys_user` VALUES (2, 105, 'sysadmin', '管理员', '00', 'test@qq.com', '15666666666', '1', '/profile/avatar/2021/03/07/12dd06a2-8e41-4361-8d68-9883a0c7e002.png', '20dd7f492aca23132b0d5b99c3210058', '9c4f05', '0', '0', '127.0.0.1', '2021-03-07 11:46:17', '2021-01-06 21:43:53', 'admin', '2021-01-06 21:43:53', '', '2021-03-07 11:46:16', '测试员');
 INSERT INTO `sys_user` VALUES (100, 108, 'test1', 'test1', '00', '2313968604@qq.com', '13024370921', '0', '', '8c3223730f92405f850fcaacd0e18a1c', 'c43f53', '0', '0', '127.0.0.1', '2021-01-16 20:44:45', NULL, 'admin', '2021-01-16 18:31:48', '', '2021-01-16 20:44:44', NULL);
 
 -- ----------------------------
@@ -1214,8 +1219,8 @@ CREATE TABLE `sys_user_online`  (
 -- Records of sys_user_online
 -- ----------------------------
 INSERT INTO `sys_user_online` VALUES ('0c2f70e7-2b1e-49b5-88b9-859542b4a9cf', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-02-15 09:30:04', '2021-02-19 13:22:57', -60000);
-INSERT INTO `sys_user_online` VALUES ('206421bd-3bb4-4567-973b-e7a66541df9a', 'sysadmin', '测试部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-03-07 11:14:25', '2021-03-07 11:32:53', -60000);
 INSERT INTO `sys_user_online` VALUES ('4e853182-bb74-446c-86a0-b4cb8493c5d8', 'sysadmin', '测试部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-03-07 11:10:26', '2021-03-07 11:12:42', -60000);
+INSERT INTO `sys_user_online` VALUES ('6f70b381-0d80-4a1c-ad75-70aa5333aa73', 'sysadmin', '测试部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-03-07 11:46:10', '2021-03-07 11:46:17', -60000);
 INSERT INTO `sys_user_online` VALUES ('7378a961-a698-4c12-9455-c87e3b291935', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-02-23 23:05:54', '2021-02-23 23:56:26', -60000);
 INSERT INTO `sys_user_online` VALUES ('739b7ff3-8c58-401a-b7a2-6d74e193dca3', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-02-28 00:09:28', '2021-02-28 21:52:46', -60000);
 INSERT INTO `sys_user_online` VALUES ('c784f3cb-a4ed-474b-aae3-faac5aa4b104', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Mobile Safari', 'Mac OS X (iPhone)', 'on_line', '2021-02-27 21:52:32', '2021-02-27 22:34:53', -60000);
