@@ -12,6 +12,7 @@ import com.ruoyi.college.mapper.QuestionAnswerMapper;
 import com.ruoyi.college.domain.QuestionAnswer;
 import com.ruoyi.college.service.IQuestionAnswerService;
 import com.ruoyi.common.core.text.Convert;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 问答Service业务层处理
@@ -62,6 +63,45 @@ public class QuestionAnswerServiceImpl implements IQuestionAnswerService
     public int insertQuestionAnswer(QuestionAnswer questionAnswer)
     {
         return questionAnswerMapper.insertQuestionAnswer(questionAnswer);
+    }
+
+    @Override
+    @Transactional
+    public int insertSameQuestionAnswer(QuestionAnswer questionAnswer) {
+
+        if(StringUtils.isNotBlank(questionAnswer.getAa())){
+            QuestionAnswer answer = new QuestionAnswer();
+            answer.setQa(questionAnswer.getAa());
+            answer.setStatus(1);
+            questionAnswerMapper.insertQuestionAnswer(answer);
+            questionAnswerMapper.insertQuestionAnswer(questionAnswer);
+            QuestionAnswerAssociation association = new QuestionAnswerAssociation();
+            association.setQuestionId(questionAnswer.getId());
+            association.setAnswerId(answer.getId());
+           return questionAnswerAssociationMapper.insertQuestionAnswerAssociation(association);
+        }
+            return questionAnswerMapper.insertQuestionAnswer(questionAnswer);
+
+    }
+
+    @Override
+    @Transactional
+    public int updateSameQuestionAnswer(QuestionAnswer questionAnswer) {
+
+        if(null!=questionAnswer.getQuestionAnswers()&&questionAnswer.getQuestionAnswers().size()>0){
+            questionAnswerMapper.updateQuestionAnswer(questionAnswer.getQuestionAnswers().get(0));
+        }
+        if(StringUtils.isNotBlank(questionAnswer.getAa())){
+            QuestionAnswer answer = new QuestionAnswer();
+            answer.setQa(questionAnswer.getAa());
+            answer.setStatus(1);
+            questionAnswerMapper.insertQuestionAnswer(answer);
+            QuestionAnswerAssociation association = new QuestionAnswerAssociation();
+            association.setQuestionId(questionAnswer.getId());
+            association.setAnswerId(answer.getId());
+            questionAnswerAssociationMapper.insertQuestionAnswerAssociation(association);
+        }
+        return questionAnswerMapper.updateQuestionAnswer(questionAnswer);
     }
 
     /**

@@ -35,6 +35,14 @@ public interface IQuestionAnswerService
      */
     public int insertQuestionAnswer(QuestionAnswer questionAnswer);
 
+
+//同时插入
+
+    public int insertSameQuestionAnswer(QuestionAnswer questionAnswer);
+
+    //同时更新
+
+    public int updateSameQuestionAnswer(QuestionAnswer questionAnswer);
     /**
      * 修改问答
      * 

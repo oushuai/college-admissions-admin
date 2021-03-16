@@ -26,6 +26,17 @@ public class QuestionAnswer extends BaseEntity
     @Excel(name = "问题&答案")
     private String qa;
 
+    public String getAa() {
+        return aa;
+    }
+
+    public void setAa(String aa) {
+        this.aa = aa;
+    }
+
+    @Excel(name = "答案")
+    private String aa;
+
     /** 用户名 */
     @Excel(name = "用户名")
     private String userId;
@@ -117,6 +128,7 @@ public class QuestionAnswer extends BaseEntity
             .append("delFlag", getDelFlag())
             .append("status", getStatus())
             .append("questionAnswers",getQuestionAnswers())
+            .append("aa",getAa())
             .toString();
     }
 }

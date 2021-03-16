@@ -2,6 +2,9 @@ package com.ruoyi.web.controller.college;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.ruoyi.common.utils.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,7 @@ public class QuestionAnswerController extends BaseController
 
     @Autowired
     private IQuestionAnswerService questionAnswerService;
+
 
     //@RequiresPermissions("college:answer:view")
     @GetMapping()
@@ -79,6 +83,7 @@ public class QuestionAnswerController extends BaseController
             QuestionAnswer questionAnswer1 = questionAnswerService.selectQuestionAnswerListByQuestionId(qa.getId());
             questionAnswers.add(questionAnswer1);
         }
+        questionAnswers=questionAnswers.stream().filter(qa -> qa.getStatus()==0).collect(Collectors.toList());
         return getDataTable(questionAnswers);
     }
 
@@ -117,13 +122,22 @@ public class QuestionAnswerController extends BaseController
         return toAjax(questionAnswerService.insertQuestionAnswer(questionAnswer));
     }
 
+    @Log(title = "问答", businessType = BusinessType.INSERT)
+    @PostMapping("/web/add")
+    @ResponseBody
+    public AjaxResult addSave1(QuestionAnswer questionAnswer)
+    {
+        return toAjax(questionAnswerService.insertSameQuestionAnswer(questionAnswer));
+    }
+
     /**
      * 修改问答
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        QuestionAnswer questionAnswer = questionAnswerService.selectQuestionAnswerById(id);
+
+        QuestionAnswer questionAnswer = questionAnswerService.selectQuestionAnswerListByQuestionId(id);
         mmap.put("questionAnswer", questionAnswer);
         return prefix + "/edit";
     }
@@ -138,6 +152,14 @@ public class QuestionAnswerController extends BaseController
     public AjaxResult editSave(QuestionAnswer questionAnswer)
     {
         return toAjax(questionAnswerService.updateQuestionAnswer(questionAnswer));
+    }
+
+    @Log(title = "问答", businessType = BusinessType.UPDATE)
+    @PostMapping("/web/edit")
+    @ResponseBody
+    public AjaxResult editSave1(QuestionAnswer questionAnswer)
+    {
+        return toAjax(questionAnswerService.updateSameQuestionAnswer(questionAnswer));
     }
 
     /**
