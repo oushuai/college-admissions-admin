@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 07/03/2021 11:46:49
+ Date: 17/03/2021 00:58:53
 */
 
 SET NAMES utf8mb4;
@@ -35,7 +35,7 @@ CREATE TABLE `apply_info`  (
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分数',
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建日期',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of apply_info
@@ -68,7 +68,7 @@ CREATE TABLE `dayoff`  (
   `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_date` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for focus
@@ -113,7 +113,7 @@ CREATE TABLE `gen_table`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table
@@ -154,7 +154,7 @@ CREATE TABLE `gen_table_column`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 146 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 145 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -239,8 +239,8 @@ CREATE TABLE `question_answer`  (
   `qa` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '问题或者答案',
   `user_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户名',
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建事件',
-  `del_flag` int(1) NULL DEFAULT NULL COMMENT '删除标志',
-  `status` int(1) NULL DEFAULT NULL COMMENT '0-问题，1-答案',
+  `del_flag` int(1) NULL DEFAULT 0 COMMENT '删除标志',
+  `status` int(1) NULL DEFAULT 0 COMMENT '0-问题，1-答案',
   `question_id` int(11) NULL DEFAULT NULL COMMENT '问题id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
@@ -248,12 +248,16 @@ CREATE TABLE `question_answer`  (
 -- ----------------------------
 -- Records of question_answer
 -- ----------------------------
-INSERT INTO `question_answer` VALUES (1, '清华大学好还是北京大学好?', '', '2021-02-16 00:00:00', 0, 0, NULL);
+INSERT INTO `question_answer` VALUES (1, '清华大学好还是北京大学好呢?', '', '2021-02-16 00:00:00', 0, 0, NULL);
 INSERT INTO `question_answer` VALUES (2, '读职高要高考分数吗？', '', '2021-02-17 19:53:22', 0, 0, NULL);
-INSERT INTO `question_answer` VALUES (3, '职高秋季招生是什么意思？', NULL, '2021-02-16 19:53:49', 0, 0, NULL);
+INSERT INTO `question_answer` VALUES (3, '职高秋季招生是什么意思？', '', '2021-02-16 19:53:49', 0, 0, NULL);
 INSERT INTO `question_answer` VALUES (4, '清华大学（Tsinghua University），简称“清华”，是中华人民共和国教育部直属的全国重点大学， [1]  位列国家“双一流”A类、“985工程”、“211工程”，入选“2011计划”、“珠峰计划”、“强基计划”、“111计划”，为九校联盟（C9）、松联盟、中国大学校长联谊会、亚洲大学联盟、环太平洋大学联盟、清华—剑桥—MIT低碳大学联盟成员、中国高层次人才培养和科学技术研究的基地，被誉为“红色工程师的摇篮”。 [1-3] \r\n学校前身清华学堂始建于1911年，校名“清华”源于校址“清华园”地名，是清政府设立的留美预备学校，其建校的资金源于1908年美国退还的部分庚子赔款。1912年更名为清华学校。1928年更名为国立清华大学。1937年抗日战争全面爆发后南迁长沙，与国立北京大学、私立南开大学组建国立长沙临时大学，1938年迁至昆明改名为国立西南联合大学。1946年迁回清华园。1949年中华人民共和国成立，清华大学进入新的发展阶段。1952年全国高等学校院系调整后成为多科性工业大学。1978年以来逐步恢复和发展为综合性的研究型大学。 [4] \r\n截至2020年8月，清华大学校园面积442.12公顷，建筑面积281.70万平方米；设有21个学院、59教学系，开设有82个本科专业；有博士后科研流动站50个，一级学科国家重点学科22个，一级学科博士、硕士学位授权点60个；有教职工15190人，在校生53302人。', NULL, '2021-02-17 10:41:58', 0, 1, NULL);
-INSERT INTO `question_answer` VALUES (5, '亲，要高考分数的哦', NULL, '2021-02-17 10:42:19', 0, 1, NULL);
-INSERT INTO `question_answer` VALUES (6, '清华北大都挺好', NULL, '2021-02-17 10:43:13', 0, 1, NULL);
+INSERT INTO `question_answer` VALUES (5, '亲亲，要高考分数的哦！', NULL, '2021-02-17 10:42:19', 0, 1, NULL);
+INSERT INTO `question_answer` VALUES (11, '不知道啊', NULL, '2021-03-17 00:39:11', 0, 1, NULL);
+INSERT INTO `question_answer` VALUES (12, '1+1', '', '2021-03-17 00:47:44', 0, 0, NULL);
+INSERT INTO `question_answer` VALUES (13, '2', NULL, '2021-03-17 00:47:49', 0, 1, NULL);
+INSERT INTO `question_answer` VALUES (14, '4', NULL, '2021-03-17 00:48:14', 0, 1, NULL);
+INSERT INTO `question_answer` VALUES (15, '2+2', '', '2021-03-17 00:48:14', 0, 0, NULL);
 
 -- ----------------------------
 -- Table structure for question_answer_association
@@ -270,6 +274,9 @@ CREATE TABLE `question_answer_association`  (
 -- ----------------------------
 INSERT INTO `question_answer_association` VALUES (1, 4);
 INSERT INTO `question_answer_association` VALUES (2, 5);
+INSERT INTO `question_answer_association` VALUES (3, 11);
+INSERT INTO `question_answer_association` VALUES (12, 13);
+INSERT INTO `question_answer_association` VALUES (15, 14);
 
 -- ----------------------------
 -- Table structure for school
@@ -293,7 +300,9 @@ CREATE TABLE `school`  (
 INSERT INTO `school` VALUES ('1', '清华大学', 'http://localhost/profile/upload/2021/01/19/efa5e737-c438-4a3b-8791-e2b2771f94d3.jpg', 'http://localhost/profile/upload/2021/01/19/df67f4c3-b245-44c0-ac92-5ca660a7e7fc.jpg', '清华大学赣州旅游职业学校是经省教育厅备案，市教育局直属的一所全日制综合性中专学校，学校坐落在赣州黄金高校区，南与赣州师范高等专科学校一墙之隔，西与赣南师范大学相邻;学习氛围浓厚，交通便利，环境优美，是广大莘莘学子求知的理想殿堂。', '<dl class=\"lemmaWgt-lemmaTitle lemmaWgt-lemmaTitle-\" style=\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; width: 700px;\"><dd class=\"lemmaWgt-lemmaTitle-keyInfo lemmaWgt-lemmaTitle-keyInfo-with-link\" style=\"margin-top: 5px; margin-right: 0px; margin-bottom: 0px; padding: 0px; border-left: 0px; line-height: 1; background-image: initial; background-position: 0px 0px; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; display: inline-block; vertical-align: middle;\"><ul style=\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding: 0px; list-style: none; font-size: 14px;\"><font color=\"#474849\" face=\"arial, tahoma, Microsoft Yahei, 宋体, sans-serif\" style=\"\"><ul style=\"background-color: rgb(239, 247, 255); margin-right: 0px; margin-left: 0px; padding: 0px; list-style: none;\"><b>985工程211工程研究生院</b></ul><ul style=\"margin-right: 0px; margin-left: 0px; padding: 0px; list-style: none;\"><b style=\"background-color: rgb(239, 247, 255);\">清华大学（Tsinghua University</b><span style=\"background-color: rgb(239, 247, 255);\">），简称“</span><span style=\"background-color: rgb(255, 0, 0);\">清华</span><span style=\"background-color: rgb(239, 247, 255);\">”，是中华人民共和国教育部直属的全国重点大学， [1]&nbsp; 位列国家“双一流”A类、“985工程”、“211工程”，入选“2011计划”、“珠峰计划”、“强基计划”、“111计划”，为九校联盟（C9）、松联盟、中国大学校长联谊会、亚洲大学联盟、环太平洋大学联盟、清华—剑桥—MIT低碳大学联盟成员、中国高层次人才培养和科学技术研究的基地，被誉为“红色工程师的摇篮”。 [1-3]&nbsp;</span></ul><ul style=\"background-color: rgb(239, 247, 255); margin-right: 0px; margin-left: 0px; padding: 0px; list-style: none;\">学校前身清华学堂始建于1911年，校名“清华”源于校址“清华园”地名，是清政府设立的留美预备学校，其建校的资金源于1908年美国退还的部分庚子赔款。1912年更名为清华学校。1928年更名为国立清华大学。1937年抗日战争全面爆发后南迁长沙，与国立北京大学、私立南开大学组建国立长沙临时大学，1938年迁至昆明改名为国立西南联合大学。1946年迁回清华园。1949年中华人民共和国成立，清华大学进入新的发展阶段。1952年全国高等学校院系调整后成为多科性工业大学。1978年以来逐步恢复和发展为综合性的研究型大学。 [4]&nbsp;</ul><ul style=\"background-color: rgb(239, 247, 255); margin-right: 0px; margin-left: 0px; padding: 0px; list-style: none;\">截至2020年8月，清华大学校园面积442.12公顷，建筑面积281.70万平方米；设有21个学院、59教学系，开设有82个本科专业；有博士后科研流动站50个，一级学科国家重点学科22个，一级学科博士、硕士学位授权点60个；有教职工15190人，在校生53302人。</ul></font></ul></dd></dl>', 1, 0);
 INSERT INTO `school` VALUES ('2', '北京大学', 'http://localhost/profile/upload/2021/01/19/2b810603-a006-443d-83da-1885e86f4169.jpg', 'http://localhost/profile/upload/2021/01/19/704f0172-ff26-4e2d-90d4-536f8d0d2333.jpg', '北京大学赣州旅游职业学校是经省教育厅备案，市教育局直属的一所全日制综合性中专学校，学校坐落在赣州黄金高校区，南与赣州师范高等专科学校一墙之隔，西与赣南师范大学相邻;学习氛围浓厚，交通便利，环境优美，是广大莘莘学子求知的理想殿堂。', '<b>啊啊啊</b>', 2, 0);
 INSERT INTO `school` VALUES ('3', '南昌大学', 'http://localhost/profile/upload/2021/01/19/506840c7-8a38-4075-a329-446e68499d71.jpg', 'http://localhost/profile/upload/2021/01/19/1ccefd55-7727-4afa-9d91-d4b5f8c0b824.jpg', '南昌大学赣州旅游职业学校是经省教育厅备案，市教育局直属的一所全日制综合性中专学校，学校坐落在赣州黄金高校区，南与赣州师范高等专科学校一墙之隔，西与赣南师范大学相邻;学习氛围浓厚，交通便利，环境优美，是广大莘莘学子求知的理想殿堂。', 'ddd', 8, 0);
+INSERT INTO `school` VALUES ('9ca2ed218f31470c', '上海交通大学', 'http://localhost/profile/upload/2021/03/16/475166eb-58f4-418b-881d-40a1d1690309.jpg', 'http://localhost/profile/upload/2021/03/16/de94561c-b061-4982-9fe7-2255d616de62.jpg', '交通大学的简介', '<p>啊发发</p>', 1, 0);
 INSERT INTO `school` VALUES ('bd64776892ea4f15', '南京大学', 'http://localhost/profile/upload/2021/02/07/4e545dfe-4a3e-468f-887e-b61320ff5ee4.jpg', 'http://localhost/profile/upload/2021/02/07/eb69ff85-79a2-40e5-815d-f3e06bfbab11.jpg', '南京大学赣州旅游职业学校是经省教育厅备案，市教育局直属的一所全日制综合性中专学校，学校坐落在赣州黄金高校区，南与赣州师范高等专科学校一墙之隔，西与赣南师范大学相邻;学习氛围浓厚，交通便利，环境优美，是广大莘莘学子求知的理想殿堂。', '<p><b><u>啊啊啊</u></b></p>', 5, 0);
+INSERT INTO `school` VALUES ('f389f7f7c7b54153', '财经大学', 'http://localhost/profile/upload/2021/03/16/f5004175-6435-4add-81d9-4bbc14c519f3.jpg', 'http://localhost/profile/upload/2021/03/16/6c6de84a-572a-4dbb-9660-00d135eeaea1.jpg', '财经大学的简介', '<p>啊啊啊啊</p>', 1, 0);
 
 -- ----------------------------
 -- Table structure for school_news
@@ -311,7 +320,7 @@ CREATE TABLE `school_news`  (
 -- ----------------------------
 -- Records of school_news
 -- ----------------------------
-INSERT INTO `school_news` VALUES (1, 'sdfsdaaaaa111', '<p>sdfsdfasddfs2222</p>', 0, '2021-01-19 00:00:00');
+INSERT INTO `school_news` VALUES (1, 'sd', '<p>sdfsdfasddfs2222</p>', 0, '2021-01-19 00:00:00');
 INSERT INTO `school_news` VALUES (2, '北京大学有多好', '清华大学（Tsinghua University），简称“清华”，是中华人民共和国教育部直属的全国重点大学， [1]  位列国家“双一流”A类、“985工程”、“211工程”，入选“2011计划”、“珠峰计划”、“强基计划”、“111计划”，为九校联盟（C9）、松联盟、中国大学校长联谊会、亚洲大学联盟、环太平洋大学联盟、清华—剑桥—MIT低碳大学联盟成员、中国高层次人才培养和科学技术研究的基地，被誉为“红色工程师的摇篮”。 [1-3] \r\n学校前身清华学堂始建于1911年，校名“清华”源于校址“清华园”地名，是清政府设立的留美预备学校，其建校的资金源于1908年美国退还的部分庚子赔款。1912年更名为清华学校。1928年更名为国立清华大学。1937年抗日战争全面爆发后南迁长沙，与国立北京大学、私立南开大学组建国立长沙临时大学，1938年迁至昆明改名为国立西南联合大学。1946年迁回清华园。1949年中华人民共和国成立，清华大学进入新的发展阶段。1952年全国高等学校院系调整后成为多科性工业大学。1978年以来逐步恢复和发展为综合性的研究型大学。 [4] \r\n截至2020年8月，清华大学校园面积442.12公顷，建筑面积281.70万平方米；设有21个学院、59教学系，开设有82个本科专业；有博士后科研流动站50个，一级学科国家重点学科22个，一级学科博士、硕士学位授权点60个；有教职工15190人，在校生53302人。', 0, '2021-02-24 00:08:36');
 INSERT INTO `school_news` VALUES (3, '赣州在哪里', '江西', 0, '2021-02-24 17:52:59');
 
@@ -506,7 +515,7 @@ CREATE TABLE `sys_job`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注信息',
   PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job
@@ -529,7 +538,7 @@ CREATE TABLE `sys_job_log`  (
   `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '异常信息',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sys_logininfor
@@ -546,7 +555,7 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '提示消息',
   `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 158 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 167 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -613,6 +622,63 @@ INSERT INTO `sys_logininfor` VALUES (158, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (159, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2021-03-07 11:46:09');
 INSERT INTO `sys_logininfor` VALUES (160, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-07 11:46:14');
 INSERT INTO `sys_logininfor` VALUES (161, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-07 11:46:16');
+INSERT INTO `sys_logininfor` VALUES (162, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-07 13:07:27');
+INSERT INTO `sys_logininfor` VALUES (163, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-07 13:13:57');
+INSERT INTO `sys_logininfor` VALUES (164, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 20:32:02');
+INSERT INTO `sys_logininfor` VALUES (165, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2021-03-16 20:32:05');
+INSERT INTO `sys_logininfor` VALUES (166, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 20:32:29');
+INSERT INTO `sys_logininfor` VALUES (167, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2021-03-16 20:40:43');
+INSERT INTO `sys_logininfor` VALUES (168, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 20:40:48');
+INSERT INTO `sys_logininfor` VALUES (169, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-16 22:01:56');
+INSERT INTO `sys_logininfor` VALUES (170, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:01:58');
+INSERT INTO `sys_logininfor` VALUES (171, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-16 22:06:40');
+INSERT INTO `sys_logininfor` VALUES (172, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:06:42');
+INSERT INTO `sys_logininfor` VALUES (173, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-16 22:08:30');
+INSERT INTO `sys_logininfor` VALUES (174, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:08:33');
+INSERT INTO `sys_logininfor` VALUES (175, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:17:07');
+INSERT INTO `sys_logininfor` VALUES (176, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:20:33');
+INSERT INTO `sys_logininfor` VALUES (177, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:24:24');
+INSERT INTO `sys_logininfor` VALUES (178, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:28:03');
+INSERT INTO `sys_logininfor` VALUES (179, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:31:57');
+INSERT INTO `sys_logininfor` VALUES (180, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 22:42:55');
+INSERT INTO `sys_logininfor` VALUES (181, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:08:49');
+INSERT INTO `sys_logininfor` VALUES (182, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-16 23:12:16');
+INSERT INTO `sys_logininfor` VALUES (183, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:12:19');
+INSERT INTO `sys_logininfor` VALUES (184, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:13:53');
+INSERT INTO `sys_logininfor` VALUES (185, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:28:46');
+INSERT INTO `sys_logininfor` VALUES (186, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:31:19');
+INSERT INTO `sys_logininfor` VALUES (187, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:45:47');
+INSERT INTO `sys_logininfor` VALUES (188, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-16 23:46:49');
+INSERT INTO `sys_logininfor` VALUES (189, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:46:52');
+INSERT INTO `sys_logininfor` VALUES (190, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:47:57');
+INSERT INTO `sys_logininfor` VALUES (191, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:55:32');
+INSERT INTO `sys_logininfor` VALUES (192, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-16 23:56:41');
+INSERT INTO `sys_logininfor` VALUES (193, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:02:53');
+INSERT INTO `sys_logininfor` VALUES (194, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:05:10');
+INSERT INTO `sys_logininfor` VALUES (195, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:10:48');
+INSERT INTO `sys_logininfor` VALUES (196, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-17 00:12:12');
+INSERT INTO `sys_logininfor` VALUES (197, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-17 00:12:14');
+INSERT INTO `sys_logininfor` VALUES (198, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:12:18');
+INSERT INTO `sys_logininfor` VALUES (199, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:13:19');
+INSERT INTO `sys_logininfor` VALUES (200, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-17 00:14:13');
+INSERT INTO `sys_logininfor` VALUES (201, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-17 00:14:17');
+INSERT INTO `sys_logininfor` VALUES (202, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:14:20');
+INSERT INTO `sys_logininfor` VALUES (203, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:15:29');
+INSERT INTO `sys_logininfor` VALUES (204, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-17 00:17:22');
+INSERT INTO `sys_logininfor` VALUES (205, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:17:24');
+INSERT INTO `sys_logininfor` VALUES (206, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:18:31');
+INSERT INTO `sys_logininfor` VALUES (207, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:20:06');
+INSERT INTO `sys_logininfor` VALUES (208, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:21:06');
+INSERT INTO `sys_logininfor` VALUES (209, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:22:36');
+INSERT INTO `sys_logininfor` VALUES (210, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:26:28');
+INSERT INTO `sys_logininfor` VALUES (211, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:27:45');
+INSERT INTO `sys_logininfor` VALUES (212, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:29:17');
+INSERT INTO `sys_logininfor` VALUES (213, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:30:15');
+INSERT INTO `sys_logininfor` VALUES (214, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2021-03-17 00:37:13');
+INSERT INTO `sys_logininfor` VALUES (215, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:37:16');
+INSERT INTO `sys_logininfor` VALUES (216, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:39:03');
+INSERT INTO `sys_logininfor` VALUES (217, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:47:35');
+INSERT INTO `sys_logininfor` VALUES (218, 'sysadmin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2021-03-17 00:49:16');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -776,7 +842,7 @@ CREATE TABLE `sys_notice`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_notice
@@ -982,6 +1048,27 @@ INSERT INTO `sys_oper_log` VALUES (267, '重置密码', 2, 'com.ruoyi.web.contro
 INSERT INTO `sys_oper_log` VALUES (268, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.update()', 'POST', 1, 'sysadmin', '测试部门', '/system/user/profile/update', '127.0.0.1', '内网IP', '{\"id\":[\"\"],\"userName\":[\"管理员\"],\"phonenumber\":[\"15666666666\"],\"email\":[\"test@qq.com\"],\"sex\":[\"1\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-07 11:06:03');
 INSERT INTO `sys_oper_log` VALUES (269, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updateAvatar()', 'POST', 1, 'sysadmin', '测试部门', '/system/user/profile/updateAvatar', '127.0.0.1', '内网IP', NULL, '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-07 11:06:35');
 INSERT INTO `sys_oper_log` VALUES (270, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/role/edit', '127.0.0.1', '内网IP', '{\"roleId\":[\"2\"],\"roleName\":[\"普通角色\"],\"roleKey\":[\"common\"],\"roleSort\":[\"2\"],\"status\":[\"0\"],\"remark\":[\"普通角色\"],\"menuIds\":[\"2000,2001,2002,2003,2004,2005,2006,2007,2008,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2031,2032,2033,2034,2035,2036\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-07 11:46:06');
+INSERT INTO `sys_oper_log` VALUES (271, '学校新闻表', 2, 'com.ruoyi.web.controller.college.SchoolNewsController.editSave()', 'POST', 1, 'sysadmin', '测试部门', '/college/news/edit', '127.0.0.1', '内网IP', '{\"id\":[\"1\"],\"newsContent\":[\"<p>sdfsdfasddfs2222</p>\"],\"createDate\":[\"2021-01-19\"],\"contentTitle\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 20:42:48');
+INSERT INTO `sys_oper_log` VALUES (272, '学校新闻表', 2, 'com.ruoyi.web.controller.college.SchoolNewsController.editSave()', 'POST', 1, 'sysadmin', '测试部门', '/college/news/edit', '127.0.0.1', '内网IP', '{\"id\":[\"1\"],\"newsContent\":[\"<p>sdfsdfasddfs2222</p>\"],\"createDate\":[\"2021-01-19\"],\"contentTitle\":[\"sd\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 20:42:56');
+INSERT INTO `sys_oper_log` VALUES (273, '学校表', 1, 'com.ruoyi.web.controller.college.SchoolController.addSave()', 'POST', 1, 'sysadmin', '测试部门', '/college/school/add', '127.0.0.1', '内网IP', '{\"name\":[\"财经大学\"],\"lego\":[\"http://localhost/profile/upload/2021/03/16/f5004175-6435-4add-81d9-4bbc14c519f3.jpg\"],\"coverImg\":[\"http://localhost/profile/upload/2021/03/16/6c6de84a-572a-4dbb-9660-00d135eeaea1.jpg\"],\"shortIntroduction\":[\"\"],\"introduction\":[\"<p>啊啊啊啊</p>\"],\"ranking\":[\"1\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 20:50:51');
+INSERT INTO `sys_oper_log` VALUES (274, '学校表', 2, 'com.ruoyi.web.controller.college.SchoolController.editSave()', 'POST', 1, 'sysadmin', '测试部门', '/college/school/edit', '127.0.0.1', '内网IP', '{\"id\":[\"f389f7f7c7b54153\"],\"name\":[\"财经大学\"],\"lego\":[\"http://localhost/profile/upload/2021/03/16/f5004175-6435-4add-81d9-4bbc14c519f3.jpg\"],\"coverImg\":[\"http://localhost/profile/upload/2021/03/16/6c6de84a-572a-4dbb-9660-00d135eeaea1.jpg\"],\"shortIntroduction\":[\"财经大学的简介\"],\"introduction\":[\"<p>啊啊啊啊</p>\"],\"ranking\":[\"1\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 20:51:05');
+INSERT INTO `sys_oper_log` VALUES (275, '学校表', 1, 'com.ruoyi.web.controller.college.SchoolController.addSave()', 'POST', 1, 'sysadmin', '测试部门', '/college/school/add', '127.0.0.1', '内网IP', '{\"name\":[\"上海交通大学\"],\"lego\":[\"http://localhost/profile/upload/2021/03/16/475166eb-58f4-418b-881d-40a1d1690309.jpg\"],\"coverImg\":[\"http://localhost/profile/upload/2021/03/16/de94561c-b061-4982-9fe7-2255d616de62.jpg\"],\"shortIntroduction\":[\"交通大学的简介\"],\"introduction\":[\"<p>啊发发</p>\"],\"ranking\":[\"1\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 20:52:10');
+INSERT INTO `sys_oper_log` VALUES (276, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲，要高考分数的哦1\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 23:32:44');
+INSERT INTO `sys_oper_log` VALUES (277, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲，要高考分数的哦22\",\"亲，要高考分数的哦\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 23:34:09');
+INSERT INTO `sys_oper_log` VALUES (278, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲，要高考分数的哦1\",\"亲，要高考分数的哦\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 23:46:15');
+INSERT INTO `sys_oper_log` VALUES (279, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲，要高考分数的哦ww\",\"亲，要高考分数的哦\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 23:47:14');
+INSERT INTO `sys_oper_log` VALUES (280, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲，要高考分数的哦22\"],\"questionAnswers[0].id\":[\"5\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 23:48:12');
+INSERT INTO `sys_oper_log` VALUES (281, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲，要高考分数的哦\"],\"questionAnswers[0].id\":[\"5\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 23:57:15');
+INSERT INTO `sys_oper_log` VALUES (282, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲，要高考分数的哦！\"],\"questionAnswers[0].id\":[\"5\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-16 23:57:46');
+INSERT INTO `sys_oper_log` VALUES (283, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"3\"],\"qa\":[\"职高秋季招生是什么意思？\"],\"aa\":[\"更新的aa哦\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:31:39');
+INSERT INTO `sys_oper_log` VALUES (284, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"1\"],\"qa\":[\"清华大学好还是北京大学好呢?\"],\"questionAnswers[0].qa\":[\"清华大学（Tsinghua University），简称“清华”，是中华人民共和国教育部直属的全国重点大学， [1]  位列国家“双一流”A类、“985工程”、“211工程”，入选“2011计划”、“珠峰计划”、“强基计划”、“111计划”，为九校联盟（C9）、松联盟、中国大学校长联谊会、亚洲大学联盟、环太平洋大学联盟、清华—剑桥—MIT低碳大学联盟成员、中国高层次人才培养和科学技术研究的基地，被誉为“红色工程师的摇篮”。 [1-3] \\r\\n学校前身清华学堂始建于1911年，校名“清华”源于校址“清华园”地名，是清政府设立的留美预备学校，其建校的资金源于1908年美国退还的部分庚子赔款。1912年更名为清华学校。1928年更名为国立清华大学。1937年抗日战争全面爆发后南迁长沙，与国立北京大学、私立南开大学组建国立长沙临时大学，1938年迁至昆明改名为国立西南联合大学。1946年迁回清华园。1949年中华人民共和国成立，清华大学进入新的发展阶段。1952年全国高等学校院系调整后成为多科性工业大学。1978年以来逐步恢复和发展为综合性的研究型大学。 [4] \\r\\n截至2020年8月，清华大学校园面积442.12公顷，建筑面积281.70万平方米；设有21个学院、59教学系，开设有82个本科专业；有博士后科研流动站50个，一级学科国家重点学科22个，一级学科博士、硕士学位授权点60个；有教职工15190人，在校生53302人。\"],\"questionAnswers[0].id\":[\"4\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:37:33');
+INSERT INTO `sys_oper_log` VALUES (285, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"2\"],\"qa\":[\"读职高要高考分数吗？\"],\"questionAnswers[0].qa\":[\"亲亲，要高考分数的哦！\"],\"questionAnswers[0].id\":[\"5\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:37:46');
+INSERT INTO `sys_oper_log` VALUES (286, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"3\"],\"qa\":[\"职高秋季招生是什么意思？\"],\"aa\":[\"不知道啊\"],\"userId\":[\"\"]}', 'null', 1, '', '2021-03-17 00:37:59');
+INSERT INTO `sys_oper_log` VALUES (287, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"3\"],\"qa\":[\"职高秋季招生是什么意思？\"],\"aa\":[\"不知道\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:39:11');
+INSERT INTO `sys_oper_log` VALUES (288, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"3\"],\"qa\":[\"职高秋季招生是什么意思？\"],\"questionAnswers[0].qa\":[\"不知道啊\"],\"questionAnswers[0].id\":[\"11\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:39:32');
+INSERT INTO `sys_oper_log` VALUES (289, '问答', 1, 'com.ruoyi.web.controller.college.QuestionAnswerController.addSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/add', '127.0.0.1', '内网IP', '{\"qa\":[\"1+1\"],\"aa\":[\"\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:47:44');
+INSERT INTO `sys_oper_log` VALUES (290, '问答', 2, 'com.ruoyi.web.controller.college.QuestionAnswerController.editSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/edit', '127.0.0.1', '内网IP', '{\"id\":[\"12\"],\"qa\":[\"1+1\"],\"aa\":[\"2\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:47:49');
+INSERT INTO `sys_oper_log` VALUES (291, '问答', 1, 'com.ruoyi.web.controller.college.QuestionAnswerController.addSave1()', 'POST', 1, 'sysadmin', '测试部门', '/college/answer/web/add', '127.0.0.1', '内网IP', '{\"qa\":[\"2+2\"],\"aa\":[\"4\"],\"userId\":[\"\"]}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2021-03-17 00:48:14');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -999,7 +1086,7 @@ CREATE TABLE `sys_post`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_post
@@ -1193,7 +1280,7 @@ CREATE TABLE `sys_user`  (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES (1, 103, 'admin', '管理员', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2021-03-07 11:45:49', '2021-01-06 21:43:53', 'admin', '2021-01-06 21:43:53', '', '2021-03-07 11:45:49', '管理员');
-INSERT INTO `sys_user` VALUES (2, 105, 'sysadmin', '管理员', '00', 'test@qq.com', '15666666666', '1', '/profile/avatar/2021/03/07/12dd06a2-8e41-4361-8d68-9883a0c7e002.png', '20dd7f492aca23132b0d5b99c3210058', '9c4f05', '0', '0', '127.0.0.1', '2021-03-07 11:46:17', '2021-01-06 21:43:53', 'admin', '2021-01-06 21:43:53', '', '2021-03-07 11:46:16', '测试员');
+INSERT INTO `sys_user` VALUES (2, 105, 'sysadmin', '管理员', '00', 'test@qq.com', '15666666666', '1', '/profile/avatar/2021/03/07/12dd06a2-8e41-4361-8d68-9883a0c7e002.png', '20dd7f492aca23132b0d5b99c3210058', '9c4f05', '0', '0', '127.0.0.1', '2021-03-17 00:49:17', '2021-01-06 21:43:53', 'admin', '2021-01-06 21:43:53', '', '2021-03-17 00:49:16', '测试员');
 INSERT INTO `sys_user` VALUES (100, 108, 'test1', 'test1', '00', '2313968604@qq.com', '13024370921', '0', '', '8c3223730f92405f850fcaacd0e18a1c', 'c43f53', '0', '0', '127.0.0.1', '2021-01-16 20:44:45', NULL, 'admin', '2021-01-16 18:31:48', '', '2021-01-16 20:44:44', NULL);
 
 -- ----------------------------
@@ -1219,8 +1306,9 @@ CREATE TABLE `sys_user_online`  (
 -- Records of sys_user_online
 -- ----------------------------
 INSERT INTO `sys_user_online` VALUES ('0c2f70e7-2b1e-49b5-88b9-859542b4a9cf', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-02-15 09:30:04', '2021-02-19 13:22:57', -60000);
+INSERT INTO `sys_user_online` VALUES ('37075fa5-3007-479f-9190-4b3421aff7fa', 'sysadmin', '测试部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-03-16 20:40:44', '2021-03-17 00:56:30', -60000);
 INSERT INTO `sys_user_online` VALUES ('4e853182-bb74-446c-86a0-b4cb8493c5d8', 'sysadmin', '测试部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-03-07 11:10:26', '2021-03-07 11:12:42', -60000);
-INSERT INTO `sys_user_online` VALUES ('6f70b381-0d80-4a1c-ad75-70aa5333aa73', 'sysadmin', '测试部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-03-07 11:46:10', '2021-03-07 11:46:17', -60000);
+INSERT INTO `sys_user_online` VALUES ('6f70b381-0d80-4a1c-ad75-70aa5333aa73', 'sysadmin', '测试部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-03-07 11:46:10', '2021-03-08 12:40:51', -60000);
 INSERT INTO `sys_user_online` VALUES ('7378a961-a698-4c12-9455-c87e3b291935', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-02-23 23:05:54', '2021-02-23 23:56:26', -60000);
 INSERT INTO `sys_user_online` VALUES ('739b7ff3-8c58-401a-b7a2-6d74e193dca3', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2021-02-28 00:09:28', '2021-02-28 21:52:46', -60000);
 INSERT INTO `sys_user_online` VALUES ('c784f3cb-a4ed-474b-aae3-faac5aa4b104', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Mobile Safari', 'Mac OS X (iPhone)', 'on_line', '2021-02-27 21:52:32', '2021-02-27 22:34:53', -60000);
