@@ -212,7 +212,7 @@ CREATE TABLE `profession`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专业名称',
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专业类型',
   `del_flag` int(1) NULL DEFAULT 0 COMMENT '删除标志',
-  `process_describe` varchar(1200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专业描述',
+  `process_describe` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专业描述',
   `process_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专业封面图',
   `year` int(11) NULL DEFAULT NULL COMMENT '就读年限',
   `ranking` int(11) NULL DEFAULT NULL COMMENT '专业排名',
@@ -236,7 +236,7 @@ INSERT INTO `profession` VALUES (10, '物联网', NULL, 0, '专业介绍面向�
 DROP TABLE IF EXISTS `question_answer`;
 CREATE TABLE `question_answer`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `qa` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '问题或者答案',
+  `qa` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '问题或者答案',
   `user_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户名',
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建事件',
   `del_flag` int(1) NULL DEFAULT 0 COMMENT '删除标志',
@@ -288,7 +288,7 @@ CREATE TABLE `school`  (
   `lego` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '学校lego',
   `cover_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '学校封面图',
   `short_introduction` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '学校简介',
-  `introduction` varchar(9000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '学校详细介绍',
+  `introduction` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '学校详细介绍',
   `ranking` int(11) NULL DEFAULT NULL COMMENT '排名',
   `del_flag` int(1) NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
